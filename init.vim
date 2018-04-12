@@ -55,7 +55,7 @@ set expandtab
 " Plugins: {{{
 
 " Specify a directory for plugins
-call plug#begin('/home/zhaoc/.local/share/nvim/plugged')
+call plug#begin('/Users/inFinity/.local/share/nvim/plugged')
 
 " CQuery: {{
     Plug 'autozimu/LanguageClient-neovim', {
@@ -74,7 +74,7 @@ call plug#begin('/home/zhaoc/.local/share/nvim/plugged')
         \ } 
 
     let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings 
-    let g:LanguageClient_settingsPath = '/home/zhaoc/.config/nvim/settings.json'
+    let g:LanguageClient_settingsPath = '/Users/inFinity/.config/nvim/settings.json'
     set completefunc=LanguageClient#complete
     set formatexpr=LanguageClient_textDocument_rangeFormatting()
     
