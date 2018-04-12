@@ -124,6 +124,12 @@ call plug#begin('$HOME/.local/share/nvim/plugged')
     let g:GitGutterEnable = 1
 "
 
+" Powerline: {{
+    " May slow down vim, but it bring fancy sightings.
+    " Plug 'Lokaltog/vim-powerline'
+    " let g:Powerline_symbols = 'fancy'
+" }}
+
 call plug#end()
 
 " }}}
