@@ -4,6 +4,9 @@
 ```shell
 git clone git@github.com:Ytinifni-zc/nvim-config.git ~/.nvim
 
+cd ~/.config
+ln -s ~/.nvim nvim
+
 # Install vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -20,4 +23,3 @@ cd ~/.local/share/nvim/plugged/LanguageClient-neovim && ./install.sh
 cd ~/.nvim
 cp ./snippets/* ~/.local/share/nvim/plugged/neosnippet-snippets/neosnippets/
 ```
-
