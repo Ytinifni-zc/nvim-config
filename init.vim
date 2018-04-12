@@ -1,4 +1,4 @@
-" ********************** Custom Configuration *************************
+" ********************** Custom Configurations *************************
 
 " Set number relative or not
 function! NumberToggle()
@@ -12,6 +12,9 @@ endfunc
 set nu
 set relativenumber
 nnoremap <C-M-n> :call NumberToggle()<CR>
+
+" Refresh nvim configurations
+nnoremap <C-M-f> :source %<CR>
 
 " Quick quit
 nnoremap qq :q<CR>
@@ -55,7 +58,7 @@ set expandtab
 " Plugins: {{{
 
 " Specify a directory for plugins
-call plug#begin('/Users/inFinity/.local/share/nvim/plugged')
+call plug#begin('$HOME/.local/share/nvim/plugged')
 
 " CQuery: {{
     Plug 'autozimu/LanguageClient-neovim', {
@@ -74,7 +77,7 @@ call plug#begin('/Users/inFinity/.local/share/nvim/plugged')
         \ } 
 
     let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings 
-    let g:LanguageClient_settingsPath = '/Users/inFinity/.config/nvim/settings.json'
+    let g:LanguageClient_settingsPath = '$HOME/.config/nvim/settings.json'
     set completefunc=LanguageClient#complete
     set formatexpr=LanguageClient_textDocument_rangeFormatting()
     
@@ -82,7 +85,7 @@ call plug#begin('/Users/inFinity/.local/share/nvim/plugged')
     nnoremap <silent> <M-d> :call LanguageClient_textDocument_definition()<CR>
     nnoremap <silent> <M-r> :call LanguageClient_textDocument_references()<CR>
     nnoremap <silent> <M-s> :call LanguageClient_textDocument_documentSymbol()<CR>
-    nnoremap <silent> <M-n>  :call LanguageClient_textDocument_rename()<CR>"
+    nnoremap <silent> <M-n> :call LanguageClient_textDocument_rename()<CR>"
     nnoremap <silent> <M-f> :call LanguageClient#textDocument_formatting()<CR>"
 " }}
 
@@ -115,6 +118,11 @@ call plug#begin('/Users/inFinity/.local/share/nvim/plugged')
     Plug 'majutsushi/tagbar'
     nmap <F2> :TagbarToggle<CR>
 " }}
+
+" Vimgitgutter: {{
+    Plug 'airblade/vim-gitgutter'
+    :GitGutterEnable
+"
 
 call plug#end()
 
