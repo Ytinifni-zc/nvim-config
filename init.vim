@@ -121,7 +121,7 @@ call plug#begin('$HOME/.local/share/nvim/plugged')
 
 " Vimgitgutter: {{
     Plug 'airblade/vim-gitgutter'
-    :GitGutterEnable
+    let g:GitGutterEnable = 1
 "
 
 call plug#end()
