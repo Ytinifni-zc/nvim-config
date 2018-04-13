@@ -136,15 +136,61 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     nmap <F2> :TagbarToggle<CR>
 " }}
 
+" *** Git ***
+
 " Vimgitgutter: {{
     Plug 'airblade/vim-gitgutter'
     let g:GitGutterEnable = 1
 "
 
+" VimFugitive: {{
+    Plug 'tpope/vim-fugitive'
+" }}
+
+" *** Vision ***
+
 " Powerline: {{
     " May slow down vim, but it bring fancy sightings.
     " Plug 'Lokaltog/vim-powerline'
     " let g:Powerline_symbols = 'fancy'
+" }}
+
+" VimDevicons: {{
+    Plug 'ryanoasis/vim-devicons'
+    set encoding=UTF-8
+" }}
+
+" AirLine: {{
+    Plug 'vim-airline/vim-airline'
+
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
+    let g:airline_left_sep = ''
+    let g:airline_left_alt_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_alt_sep = ''
+    let g:airline_symbols.branch = ''
+    let g:airline_symbols.readonly = ''
+    let g:airline_symbols.linenr = '☰'
+    let g:airline_symbols.maxlinenr = ''
+
+    let g:airline_extensions = ['branch', 'tabline']
+
+    " Airline Tab
+    " let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#left_sep = ' '
+    let g:airline#extensions#tabline#left_alt_sep = '|'
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+    " Airline Branch
+    " let g:airline#extensions#branch#enabled = 1
+    let g:airline#extensions#branch#empty_message = ''
+    let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"]
+    let g:airline#extensions#branch#use_vcscommand = 0
+    let g:airline#extensions#branch#format = 1
+    let g:airline#extensions#branch#sha1_len = 10
+    
 " }}
 
 " CppColorEnhancer: {{
