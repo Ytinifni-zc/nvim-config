@@ -12,6 +12,7 @@ endfunc
 set nu
 set relativenumber
 nnoremap <C-M-n> :call NumberToggle()<CR>
+highlight LineNr ctermfg=grey
 
 " Refresh nvim configurations
 nnoremap <C-M-f> :source %<CR>
@@ -57,6 +58,11 @@ set expandtab
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
+endif
+
+" Set true color
+if has("termguicolors")
+  " set termguicolors
 endif
 
 " **********************       End Config      *************************
@@ -139,6 +145,11 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     " May slow down vim, but it bring fancy sightings.
     " Plug 'Lokaltog/vim-powerline'
     " let g:Powerline_symbols = 'fancy'
+" }}
+
+" CppColorEnhancer: {{
+    Plug 'octol/vim-cpp-enhanced-highlight'
+    let g:cpp_member_variable_highlight = 1
 " }}
 
 call plug#end()
