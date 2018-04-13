@@ -58,7 +58,9 @@ set expandtab
 " Plugins: {{{
 
 " Specify a directory for plugins
-call plug#begin('$HOME/.local/share/nvim/plugged')
+let plug_path = $HOME
+let plug_path .= '/.local/share/nvim/plugged'
+call plug#begin(plug_path)
 
 " CQuery: {{
     Plug 'autozimu/LanguageClient-neovim', {
@@ -75,9 +77,15 @@ call plug#begin('$HOME/.local/share/nvim/plugged')
         \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
         \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
         \ } 
+    let g:LanguageClient_rootMarkers = {
+     \ 'cpp': ['.cquery', 'compile_commands.json', 'build'],
+     \ 'c': ['.cquery', 'compile_commands.json', 'build'],
+     \ }
 
     let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings 
-    let g:LanguageClient_settingsPath = '$HOME/.config/nvim/settings.json'
+    let lsp_setting_path = $HOME
+    let lsp_setting_path .= '/.config/nvim/settings.json'
+    let g:LanguageClient_settingsPath = lsp_setting_path
     set completefunc=LanguageClient#complete
     set formatexpr=LanguageClient_textDocument_rangeFormatting()
     
