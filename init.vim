@@ -52,6 +52,13 @@ set shiftwidth=2
 " On pressing tab, insert 2 spaces
 set expandtab
 
+" Uncomment the following to have Vim jump to the last position when
+" reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+
 " **********************       End Config      *************************
 
 
