@@ -147,6 +147,22 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     Plug 'tpope/vim-fugitive'
 " }}
 
+" NerdtreeGitPlugin: {{
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    let g:NERDTreeIndicatorMapCustom = {
+        \ "Modified"  : "✹",
+        \ "Staged"    : "✚",
+        \ "Untracked" : "✭",
+        \ "Renamed"   : "➜",
+        \ "Unmerged"  : "═",
+        \ "Deleted"   : "✖",
+        \ "Dirty"     : "✗",
+        \ "Clean"     : "✔︎",
+        \ 'Ignored'   : '☒',
+        \ "Unknown"   : "?"
+        \ }
+" }}
+
 " *** Vision ***
 
 " Powerline: {{
