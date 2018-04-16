@@ -38,6 +38,7 @@ nnoremap <M-6> :buffer 6<CR>
 nnoremap <M-7> :buffer 7<CR>
 nnoremap <M-8> :buffer 8<CR>
 nnoremap <M-9> :buffer 9<CR>
+nnoremap <M-0> :buffer 10<CR>
 
 " Highline current line
 set cursorline
@@ -67,6 +68,7 @@ endif
 
 " **********************       End Config      *************************
 
+" **********************        Plugins        *************************
 
 " Plugins: {{{
 
@@ -217,3 +219,4 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 call plug#end()
 
 " }}}
+" **********************      End Plugins      *************************
