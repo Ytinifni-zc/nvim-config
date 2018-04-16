@@ -1,4 +1,5 @@
 # nvim-config
+This is a customized and high-efficiency Neovim configuration, especially for cpp project.
 
 ## Install
 ```shell
