@@ -57,4 +57,4 @@ Key Mapping:
 
 ## Screen shots
 
-[](./screenshots/nvim-config.png)
+![](./screenshots/nvim-config.png)
