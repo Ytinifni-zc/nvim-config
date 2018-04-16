@@ -33,12 +33,12 @@ cp ./snippets/* ~/.local/share/nvim/plugged/neosnippet-snippets/neosnippets/
 - [Cquery](https://github.com/cquery-project/cquery) is depended.
 
 Key Mapping:
-- <M-h>: hover
-- <M-d>: Jump to definition
-- <M-r>: List references
-- <M-s>: Document symbol
-- <M-n>: Remame(Refactor)
-- <M-f>: Formatting code
+- `<M-h>`: hover
+- `<M-d>`: Jump to definition
+- `<M-r>`: List references
+- `<M-s>`: Document symbol
+- `<M-n>`: Remame(Refactor)
+- `<M-f>`: Formatting code
 
 ### Project configuration
 
@@ -54,3 +54,7 @@ Key Mapping:
 - [VimDevicons](https://github.com/ryanoasis/vim-devicons) shows file icons in nvim.
 - [AirLine](https://github.com/ryanoasis/vim-airline/vim-airline) beautifies state line and tabline.
 - [CppColorEnhancer](https://github.com/octol/vim-cpp-enhanced-highlight) cpp code color enhancer.
+
+## Screen shots
+
+[](./screenshots/nvim-config.png)
