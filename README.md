@@ -45,9 +45,12 @@ Key Mapping:
 - [Neosnippets](https://github.com/Shougo/neosnippet.vim) and [Neosnippets-snippets](https://github.com/Shougo/neosnippet-snippets) are using for fast code templete completion.
 - [Deoplete](https://github.com/Shougo/deoplete.nvim) is the basic completing engine.
 - [NERDTree](https://github.com/scrooloose/nerdtree) shows a toggle to list the project directory.
+  - `<F3>`: Open NERDTree toggle.
 - [NERDTreeGitPlugin](https://github.com/Xuyuanp/nerdtree-git-plugin<Paste>) adds git status to NERDTree.
 - [Tagbar](https://github.com/majutsushi/tagbar) shows a toggle for code structions.
+  - `<F2>`: Open Tagbar toggle.
 - [VimFugitive](https://github.com/tpope/vim-fugitive) offers git operations commands in nvim.
+  - `:help fugitive`: show handbook of VimFugitive.
 
 ### Vision enhancer (May slow down nvim)
 

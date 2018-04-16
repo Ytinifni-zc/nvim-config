@@ -54,6 +54,15 @@ set shiftwidth=2
 " On pressing tab, insert 2 spaces
 set expandtab
 
+" Pair completion
+inoremap        (  ()<Left>
+inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap        [  []<Left>
+inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+inoremap        {  {}<Left>
+inoremap <expr> }  strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
+inoremap        {<CR>  {<CR>}<Esc>O
+
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 if has("autocmd")
@@ -219,4 +228,4 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 call plug#end()
 
 " }}}
-" **********************      End Plugins      *************************
+" **********************      End Plugins       *************************
