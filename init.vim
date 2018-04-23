@@ -19,6 +19,8 @@ nnoremap <C-M-f> :source %<CR>
 
 " Quick quit
 nnoremap qq :q<CR>
+nnoremap qQ :q!<CR>
+nnoremap QQ :wq<CR>
 
 " No hightlight
 nnoremap <Esc><Esc> :nohl<CR>
@@ -74,6 +76,9 @@ endif
 if has("termguicolors")
   " set termguicolors
 endif
+
+" Set tags
+set tags=./.tags;.tags
 
 " **********************       End Config      *************************
 
@@ -137,14 +142,49 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     let g:deoplete#enable_at_startup = 1
 " }}
 
+" Echodoc: {{
+    Plug 'Shougo/echodoc.vim'
+" }}
+
+" Ale: {{
+"    Plug 'w0rp/ale'
+"    let g:ale_linters_explicit = 1
+"    let g:ale_completion_delay = 500
+"    let g:ale_echo_delay = 20
+"    let g:ale_lint_delay = 500
+"    let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+"    let g:ale_lint_on_text_changed = 'normal'
+"    let g:ale_lint_on_insert_leave = 1
+"    let g:airline#extensions#ale#enabled = 1
+"    
+"    let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+"    let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++11'
+"    let g:ale_c_cppcheck_options = ''
+"    let g:ale_cpp_cppcheck_options = ''
+"
+"    let g:ale_sign_error = "\ue009\ue009"
+"    hi! clear SpellBad
+"    hi! clear SpellCap
+"    hi! clear SpellRare
+"    hi! SpellBad gui=undercurl guisp=red
+"    hi! SpellCap gui=undercurl guisp=blue
+"    hi! SpellRare gui=undercurl guisp=magenta
+"
+" }}
+
 " NERDTree: {{
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     nmap <F3> :NERDTreeToggle<CR>
 " }}
 
 " Tagbar: {{
-    Plug 'majutsushi/tagbar'
-    nmap <F2> :TagbarToggle<CR>
+"    Plug 'majutsushi/tagbar'
+"    nmap <F2> :TagbarToggle<CR>
+" }}
+
+" LeaderF: {{
+    Plug 'Yggdroot/LeaderF'
+    nmap <F2> :LeaderfFunction<CR>
 " }}
 
 " *** Git ***
@@ -172,6 +212,42 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
         \ 'Ignored'   : '☒',
         \ "Unknown"   : "?"
         \ }
+" }}
+
+" Gutentags: {{
+    Plug 'ludovicchabant/vim-gutentags'
+
+    " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+    " gutentags searches characters of project directories, and stops
+    " recusively searching.
+    let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+    
+    let g:gutentags_ctags_tagfile = '.tags'
+    
+    " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+    let s:vim_tags = expand('~/.cache/tags')
+    let g:gutentags_cache_dir = s:vim_tags
+    
+    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+    
+    if !isdirectory(s:vim_tags)
+       silent! call mkdir(s:vim_tags, 'p')
+    endif
+" }}
+
+" Asyncrun: {{
+    Plug 'skywind3000/asyncrun.vim'
+    let g:asyncrun_open = 6
+    let g:asyncrun_bell = 1
+    nnoremap <silent> <F4> :AsyncRun -cwd="$(VIM_ROOT)/build" cmake .. <cr>
+    nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+    nnoremap <silent> <F6> :AsyncRun -cwd=<root> -raw make test <cr>
+    nnoremap <silent> <F7> :AsyncRun -cwd=<root> make -j <cr>
+    nnoremap <silent> <F8> :AsyncRun -cwd=<root> -raw make run <cr>
+    nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+    nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 " }}
 
 " *** Vision ***
