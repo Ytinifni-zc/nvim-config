@@ -178,40 +178,13 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 " }}
 
 " Tagbar: {{
-"    Plug 'majutsushi/tagbar'
-"    nmap <F2> :TagbarToggle<CR>
+   Plug 'majutsushi/tagbar'
+   nmap <F2> :TagbarToggle<CR>
 " }}
 
 " LeaderF: {{
     Plug 'Yggdroot/LeaderF'
     nmap <F2> :LeaderfFunction<CR>
-" }}
-
-" *** Git ***
-
-" Vimgitgutter: {{
-    Plug 'airblade/vim-gitgutter'
-    let g:GitGutterEnable = 1
-"
-
-" VimFugitive: {{
-    Plug 'tpope/vim-fugitive'
-" }}
-
-" NerdtreeGitPlugin: {{
-    Plug 'Xuyuanp/nerdtree-git-plugin'
-    let g:NERDTreeIndicatorMapCustom = {
-        \ "Modified"  : "✹",
-        \ "Staged"    : "✚",
-        \ "Untracked" : "✭",
-        \ "Renamed"   : "➜",
-        \ "Unmerged"  : "═",
-        \ "Deleted"   : "✖",
-        \ "Dirty"     : "✗",
-        \ "Clean"     : "✔︎",
-        \ 'Ignored'   : '☒',
-        \ "Unknown"   : "?"
-        \ }
 " }}
 
 " Gutentags: {{
@@ -248,6 +221,49 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     nnoremap <silent> <F8> :AsyncRun -cwd=<root> -raw make run <cr>
     nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
     nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+" }}
+
+" *** Git ***
+
+" Vimgitgutter: {{
+    Plug 'airblade/vim-gitgutter'
+    let g:GitGutterEnable = 1
+"
+
+" VimFugitive: {{
+    Plug 'tpope/vim-fugitive'
+" }}
+
+" NerdtreeGitPlugin: {{
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    let g:NERDTreeIndicatorMapCustom = {
+        \ "Modified"  : "✹",
+        \ "Staged"    : "✚",
+        \ "Untracked" : "✭",
+        \ "Renamed"   : "➜",
+        \ "Unmerged"  : "═",
+        \ "Deleted"   : "✖",
+        \ "Dirty"     : "✗",
+        \ "Clean"     : "✔︎",
+        \ 'Ignored'   : '☒',
+        \ "Unknown"   : "?"
+        \ }
+" }}
+
+" *** Markdown ***
+
+" MarkdownComposer: {{
+    function! BuildComposer(info)
+      if a:info.status != 'unchanged' || a:info.force
+        if has('nvim')
+          !cargo build --release
+        else
+          !cargo build --release --no-default-features --features json-rpc
+        endif
+      endif
+    endfunction
+    
+    Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 " }}
 
 " *** Vision ***
