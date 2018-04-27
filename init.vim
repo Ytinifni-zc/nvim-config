@@ -184,7 +184,7 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 
 " LeaderF: {{
     Plug 'Yggdroot/LeaderF'
-    nmap <F2> :LeaderfFunction<CR>
+    nmap <C-F2> :LeaderfFunction<CR>
 " }}
 
 " Gutentags: {{
