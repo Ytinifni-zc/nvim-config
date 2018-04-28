@@ -285,8 +285,8 @@ snippet ret
 ## Loops
 # for
 snippet for
-	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
-		${4}
+	for (${1:int} ${2:i} = 0; $2 < ${3:count}; ${4:++}$2) {
+		${5}
 	}
 # for (custom)
 snippet forr

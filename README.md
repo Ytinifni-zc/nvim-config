@@ -51,6 +51,18 @@ Key Mapping:
   - `<F2>`: Open Tagbar toggle.
 - [VimFugitive](https://github.com/tpope/vim-fugitive) offers git operations commands in nvim.
   - `:help fugitive`: show handbook of VimFugitive.
+- [Asyncrun](https://github.com/skywind3000/asyncrun.vim) compiles project and run in async buffer.
+  - `<F4>`: cmake
+  - `<F5>`: run single file
+  - `<F6>`: run test
+  - `<F7>`: make -j
+  - `<F8>`: make run
+  - `<F9>`: compile single file
+  - `<F10>`: show Asyncrun toggle
+- [Vim-gutentags](https://github.com/ludovicchabant/vim-gutentags) generates tags silently to ~/.cache/tags
+  - Replace gnu-ctags by [Universal-ctags](https://ctags.io).
+- [LeaderF](https://github.com/Yggdroot/LeaderF) supports fast function searching and jumping.
+  - `<C-l>`: show LeaderF function.
 
 ### Vision enhancer (May slow down nvim)
 

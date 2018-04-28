@@ -20,6 +20,13 @@ snippet costl
 snippet split
   auto ${3:str_list} = common_utils::string_split(${1:str}, ${2:char});
 
+# parallel for
+snippet parfor
+  #pragma omp parallel for
+  for (${1:int} ${2:i} = ${3:0}; $2 < ${4:length}; ++$2) {
+    ${0}
+  }
+
 # #include <...>
 snippet inc
 options     head

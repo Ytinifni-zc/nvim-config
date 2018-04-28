@@ -184,7 +184,7 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 
 " LeaderF: {{
     Plug 'Yggdroot/LeaderF'
-    nmap <C-F2> :LeaderfFunction<CR>
+    nmap <C-l> :LeaderfFunction<CR>
 " }}
 
 " Gutentags: {{
@@ -315,6 +315,7 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 " CppColorEnhancer: {{
     Plug 'octol/vim-cpp-enhanced-highlight'
     let g:cpp_member_variable_highlight = 1
+    let g:cpp_class_scope_highlight = 1
 " }}
 
 call plug#end()
