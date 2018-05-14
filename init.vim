@@ -22,6 +22,13 @@ nnoremap qq :q<CR>
 nnoremap qQ :q!<CR>
 nnoremap QQ :wq<CR>
 
+" Quick save
+nnoremap <M-w> :w<CR>
+
+" Add space line
+nnoremap <CR> o<Esc>
+nnoremap <M-CR> O<Esc>
+
 " No hightlight
 nnoremap <Esc><Esc> :nohl<CR>
 
@@ -219,7 +226,7 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     nnoremap <silent> <F6> :AsyncRun -cwd=<root> -raw make test <cr>
     nnoremap <silent> <F7> :AsyncRun -cwd=<root> make -j <cr>
     nnoremap <silent> <F8> :AsyncRun -cwd=<root> -raw make run <cr>
-    nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+    nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 -fopenmp "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
     nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 " }}
 
