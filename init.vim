@@ -26,6 +26,9 @@ nnoremap QQ :wq<CR>
 nnoremap <M-w> :w<CR>
 inoremap <M-s> <ESC>:w<CR>a
 
+" Reload configurations
+nnoremap <M-S-r> :so $MYVIMRC<CR>
+
 " Add space line
 nnoremap <CR> o<Esc>
 nnoremap <M-CR> O<Esc>
