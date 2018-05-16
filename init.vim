@@ -24,6 +24,7 @@ nnoremap QQ :wq<CR>
 
 " Quick save
 nnoremap <M-w> :w<CR>
+inoremap <M-s> <ESC>:w<CR>a
 
 " Add space line
 nnoremap <CR> o<Esc>
