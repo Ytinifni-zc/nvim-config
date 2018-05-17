@@ -285,6 +285,13 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     " let g:Powerline_symbols = 'fancy'
 " }}
 
+" Indentguides: {{
+  Plug 'thaerkh/vim-indentguides'
+  let g:indentguides_ignorelist = ['text']
+  let g:indentguides_spacechar = '┆'
+  let g:indentguides_tabchar = '|'
+" }}
+
 " VimDevicons: {{
     Plug 'ryanoasis/vim-devicons'
     set encoding=UTF-8
