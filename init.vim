@@ -1,5 +1,9 @@
 " ********************** Custom Configurations *************************
 
+" set re=1
+" set ttyfast
+" set lazyredraw
+
 " Set number relative or not
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -10,9 +14,37 @@ function! NumberToggle()
 endfunc
 
 set nu
-set relativenumber
+set norelativenumber
 nnoremap <C-M-n> :call NumberToggle()<CR>
 highlight LineNr ctermfg=grey
+
+" Set jk or gj gk
+let w:jk = 1
+function! JKToggle()
+  if w:jk == 1
+    nnoremap j gj
+    nnoremap k gk
+    let w:jk = 0
+  else
+    nnoremap j j
+    nnoremap k k
+    let w:jk = 1
+  endif
+endfunc
+
+nnoremap <C-M-j> :call JKToggle()<CR>
+
+" Map Tab as completion key
+function! SuperTab()
+  let l:part = strpart(getline('.'),col('.')-2,1)
+  if (l:part=~'^\W\?$')
+      return "\<Tab>"
+  else
+      return "\<C-n>"
+  endif
+endfunction
+
+imap <Tab> <C-R>=SuperTab()<CR>
 
 " Refresh nvim configurations
 nnoremap <C-M-f> :source %<CR>
@@ -34,7 +66,7 @@ nnoremap <CR> o<Esc>
 nnoremap <M-CR> O<Esc>
 
 " No hightlight
-nnoremap <Esc><Esc> :nohl<CR>
+nnoremap <Esc><Esc> :nohl<CR>:w<CR>
 
 " Map Tab as C-w
 nnoremap <Tab> <C-w>w
@@ -54,7 +86,7 @@ nnoremap <M-9> :buffer 9<CR>
 nnoremap <M-0> :buffer 10<CR>
 
 " Highline current line
-set cursorline
+" set cursorline
 " hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
@@ -105,7 +137,7 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
         \ 'branch': 'next',
         \ 'do': 'bash install.sh',
         \ }
-    
+
     " Multi-entry selection UI. FZF
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
@@ -124,7 +156,7 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
     set completefunc=LanguageClient#complete
     set formatexpr=LanguageClient_textDocument_rangeFormatting()
-    
+
     nnoremap <silent> <M-h> :call LanguageClient_textDocument_hover()<CR>
     nnoremap <silent> <M-d> :call LanguageClient_textDocument_definition()<CR>
     nnoremap <silent> <M-r> :call LanguageClient_textDocument_references()<CR>
@@ -194,8 +226,8 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 " }}
 
 " LeaderF: {{
-    Plug 'Yggdroot/LeaderF'
-    nmap <C-l> :LeaderfFunction<CR>
+   Plug 'Yggdroot/LeaderF'
+   nmap <C-l> :LeaderfFunction<CR>
 " }}
 
 " Gutentags: {{
@@ -327,7 +359,6 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     let g:airline#extensions#branch#use_vcscommand = 0
     let g:airline#extensions#branch#format = 1
     let g:airline#extensions#branch#sha1_len = 10
-    
 " }}
 
 " CppColorEnhancer: {{
