@@ -14,7 +14,7 @@ function! NumberToggle()
 endfunc
 
 set nu
-set norelativenumber
+set relativenumber
 nnoremap <C-M-n> :call NumberToggle()<CR>
 highlight LineNr ctermfg=grey
 
@@ -34,6 +34,18 @@ endfunc
 
 nnoremap <C-M-j> :call JKToggle()<CR>
 
+" centers the current pane as the middle 2 of 4 imaginary columns
+" should be called in a window with a single pane
+
+ function CenterPane()
+   lefta vnew
+   wincmd w
+   exec 'vertical resize '. string(&columns * 0.75)
+ endfunction
+
+" optionally map it to a key:
+nnoremap <M-c> :call CenterPane()<cr>
+
 " Map Tab as completion key
 function! SuperTab()
   let l:part = strpart(getline('.'),col('.')-2,1)
@@ -52,6 +64,7 @@ nnoremap <C-M-f> :source %<CR>
 " Quick quit
 nnoremap qq :q<CR>
 nnoremap qQ :q!<CR>
+nnoremap Qq :qa!<CR>
 nnoremap QQ :wq<CR>
 
 " Quick save
@@ -65,8 +78,16 @@ nnoremap <M-S-r> :so $MYVIMRC<CR>
 nnoremap <CR> o<Esc>
 nnoremap <M-CR> O<Esc>
 
+" Add ; at end of line
+nnoremap <M-;> A;<Esc>
+inoremap <M-;> <Esc>A;
+
+" Map C-f & C-b
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+
 " No hightlight
-nnoremap <Esc><Esc> :nohl<CR>:w<CR>
+nnoremap <Esc> :nohl<CR>:w<CR>
 
 " Map Tab as C-w
 nnoremap <Tab> <C-w>w

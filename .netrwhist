@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/zhaoc/git/ligra/apps'
-let g:netrw_dirhist_2='/home/zhaoc/git/PowerGraph/src/graphlab'
-let g:netrw_dirhist_3='/home/zhaoc/git/PowerGraph/src/graphlab/docs'
-let g:netrw_dirhist_4='/home/zhaoc/git/PowerGraph/src/graphlab'
-let g:netrw_dirhist_5='/home/zhaoc/Workspace/CSC/src/algorithm'
-let g:netrw_dirhist_6='/home/zhaoc/Workspace/CSC/src'
-let g:netrw_dirhist_7='/home/zhaoc/Workspace/CSC/.git'
-let g:netrw_dirhist_8='/mnt/disk1/zhaocheng/dataset/indochina-2004'
-let g:netrw_dirhist_9='/mnt/disk1/zhaocheng/dataset/amazon'
+let g:netrw_dirhist_cnt =0

@@ -27,6 +27,21 @@ snippet parfor
     ${0}
   }
 
+# string snippet
+snippet yyy
+  "${1}"${0}
+
+snippet snn
+  ${1} << "\n";${0}
+
+snippet MM
+alias mm
+  << ${1} << "\n";${0}
+
+snippet MMM
+alias mmm
+  << ${1} << ${2} << "\n";${0}
+
 snippet pfor
   #pragma omp parallel for
 snippet pato
@@ -127,7 +142,7 @@ snippet     helloworld
 abbr        #include<iostream> int main...
     #include <iostream>
 
-    int main(int argc, char const* argv[]) {
+    int main(int argc, char * argv[]) {
         std::cout << "hello, world!" << std::endl;
         return 0;
     }
