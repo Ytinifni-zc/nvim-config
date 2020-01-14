@@ -71,6 +71,10 @@ nnoremap QQ :wq<CR>
 nnoremap <M-w> :w<CR>
 inoremap <M-s> <ESC>:w<CR>a
 
+" Quick add <>
+" TODO
+" vnoremap <M-,> 
+
 " Reload configurations
 nnoremap <M-S-r> :so $MYVIMRC<CR>
 
