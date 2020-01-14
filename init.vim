@@ -144,6 +144,10 @@ endif
 " Set tags
 set tags=./.tags;.tags
 
+" Copy to clipboard On {Mac OSX}
+vnoremap <M-c> :w !pbcopy<cr>
+vnoremap <M-S-c> :%w !pbcopy<cr>
+
 " **********************       End Config      *************************
 
 " **********************        Plugins        *************************
@@ -242,8 +246,8 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 " }}
 
 " Tagbar: {{
-   Plug 'majutsushi/tagbar'
-   nmap <F2> :TagbarToggle<CR>
+"  Plug 'majutsushi/tagbar'
+"  nmap <F2> :TagbarToggle<CR>
 " }}
 
 " LeaderF: {{
