@@ -71,6 +71,10 @@ nnoremap QQ :wq<CR>
 nnoremap <M-w> :w<CR>
 inoremap <M-s> <ESC>:w<CR>a
 
+" Preview definition
+nnoremap z] <C-w>}
+nnoremap zx <C-w>z
+
 " Quick add <>
 " TODO
 " vnoremap <M-,> 
@@ -79,8 +83,8 @@ inoremap <M-s> <ESC>:w<CR>a
 nnoremap <M-S-r> :so $MYVIMRC<CR>
 
 " Add space line
-nnoremap <CR> o<Esc>
-nnoremap <M-CR> O<Esc>
+" nnoremap <CR> o<Esc>
+" nnoremap <M-CR> O<Esc>
 
 " Add ; at end of line
 nnoremap <M-;> A;<Esc>
@@ -148,6 +152,27 @@ endif
 " Set tags
 set tags=./.tags;.tags
 
+" Set true color
+" if (has("termguicolors"))
+"   set termguicolors
+" endif
+
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
 " **********************       End Config      *************************
 
 " **********************        Plugins        *************************
@@ -157,38 +182,39 @@ set tags=./.tags;.tags
 " Specify a directory for plugins
 call plug#begin($HOME.'/.local/share/nvim/plugged')
 
-" CQuery: {{
-    Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-        \ }
-
-    " Multi-entry selection UI. FZF
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
-
-    " Configure cquery and key maps
-    let g:LanguageClient_serverCommands = {
-        \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-        \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
-        \ } 
-    let g:LanguageClient_rootMarkers = {
-     \ 'cpp': ['.cquery', 'compile_commands.json', 'build'],
-     \ 'c': ['.cquery', 'compile_commands.json', 'build'],
-     \ }
-
-    let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings 
-    let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
-    set completefunc=LanguageClient#complete
-    set formatexpr=LanguageClient_textDocument_rangeFormatting()
-
-    nnoremap <silent> <M-h> :call LanguageClient_textDocument_hover()<CR>
-    nnoremap <silent> <M-d> :call LanguageClient_textDocument_definition()<CR>
-    nnoremap <silent> <M-r> :call LanguageClient_textDocument_references()<CR>
-    nnoremap <silent> <M-s> :call LanguageClient_textDocument_documentSymbol()<CR>
-    nnoremap <silent> <M-n> :call LanguageClient_textDocument_rename()<CR>"
-    nnoremap <silent> <M-f> :call LanguageClient#textDocument_formatting()<CR>"
-" }}
+" " CQuery: {{
+"     Plug 'autozimu/LanguageClient-neovim', {
+"         \ 'branch': 'next',
+"         \ 'do': 'bash install.sh',
+"         \ }
+" 
+"     " Multi-entry selection UI. FZF
+"     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"     Plug 'junegunn/fzf.vim'
+" 
+"     " Configure cquery and key maps
+"     let g:LanguageClient_serverCommands = {
+"         \ 'cpp': ['ccls', '--log-file=/tmp/cc.log'],
+"         \ 'c': ['ccls', '--log-file=/tmp/cc.log'],
+"         \ } 
+"     let g:LanguageClient_rootMarkers = {
+"      \ 'cpp': ['.ccls', 'compile_commands.json', 'build'],
+"      \ 'c': ['.ccls', 'compile_commands.json', 'build'],
+"      \ }
+" 
+"     let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings 
+"     let g:LanguageClient_settingsPath = $HOME.'/.config/nvim/settings.json'
+"     let g:LanguageClient_hasSnippetSupport = 0
+"     set completefunc=LanguageClient#complete
+"     set formatexpr=LanguageClient_textDocument_rangeFormatting()
+" 
+"     nnoremap <silent> <M-h> :call LanguageClient_textDocument_hover()<CR>
+"     nnoremap <silent> <M-d> :call LanguageClient_textDocument_definition()<CR>
+"     nnoremap <silent> <M-r> :call LanguageClient_textDocument_references()<CR>
+"     nnoremap <silent> <M-s> :call LanguageClient_textDocument_documentSymbol()<CR>
+"     nnoremap <silent> <M-n> :call LanguageClient_textDocument_rename()<CR>"
+"     nnoremap <silent> <M-f> :call LanguageClient#textDocument_formatting()<CR>"
+" " }}
 
 " Neosnippets: {{
     Plug 'Shougo/neosnippet'
@@ -200,14 +226,14 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 " }}
 
 " Deoplete: {{
-    if has('nvim')
-      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    else
-      Plug 'Shougo/deoplete.nvim'
-      Plug 'roxma/nvim-yarp'
-      Plug 'roxma/vim-hug-neovim-rpc'
-    endif
-    let g:deoplete#enable_at_startup = 1
+"   if has('nvim')
+"     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"   else
+"     Plug 'Shougo/deoplete.nvim'
+"     Plug 'roxma/nvim-yarp'
+"     Plug 'roxma/vim-hug-neovim-rpc'
+"   endif
+"   let g:deoplete#enable_at_startup = 1
 " }}
 
 " Echodoc: {{
@@ -255,27 +281,86 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
    nmap <C-l> :LeaderfFunction<CR>
 " }}
 
-" Gutentags: {{
-    Plug 'ludovicchabant/vim-gutentags'
-
-    " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-    " gutentags searches characters of project directories, and stops
-    " recusively searching.
-    let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-    
-    let g:gutentags_ctags_tagfile = '.tags'
-    
-    " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-    let s:vim_tags = expand('~/.cache/tags')
-    let g:gutentags_cache_dir = s:vim_tags
-    
-    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-    
-    if !isdirectory(s:vim_tags)
-       silent! call mkdir(s:vim_tags, 'p')
+" Vimlsp: {{
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
+    if executable('pyls')
+      " pip install python-language-server
+      au User lsp_setup call lsp#register_server({
+            \ 'name': 'pyls',
+            \ 'cmd': {server_info->['pyls']},
+            \ 'whitelist': ['python'],
+            \ })
     endif
+
+    " Register ccls C++ lanuage server.
+    if executable('ccls')
+      au User lsp_setup call lsp#register_server({
+            \ 'name': 'ccls',
+            \ 'cmd': {server_info->['ccls']},
+            \ 'root_uri': {server_info->lsp#utils#path_to_uri(
+            \       lsp#utils#find_nearest_parent_file_directory(
+            \	      	lsp#utils#get_buffer_path(),
+            \	      	['.ccls', 'compile_commands.json']
+            \	      ))},
+            \ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
+            \ 'whitelist': ['c', 'cpp', 'h', 'hpp', 'objc', 'objcpp', 'cc'],
+            \ })
+    endif
+    let g:lsp_log_verbose = 1
+    let g:lsp_log_file = expand('~/vim-lsp.log')
+    nn <silent> <M-d> :LspDefinition<cr>
+    nn <silent> <M-r> :LspReferences<cr>
+    nn <f2> :LspRename<cr>
+    nn <silent> <M-a> :LspWorkspaceSymbol<cr>
+    nn <silent> <M-l> :LspDocumentSymbol<cr>
+    nn <silent> <M-h> :LspHover<cr>
+    nn <silent> <M-n> :LspRename<cr>
+
+" }}
+
+" Asyncomplete: {{
+    Plug 'prabirshrestha/asyncomplete.vim'
+    inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+
+    imap <M-space> <Plug>(asyncomplete_force_refresh)
+    let g:asyncomplete_auto_popup = 0
+
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
+
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ asyncomplete#force_refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"<Paste>
+" }}
+
+" Gutentags: {{
+"     Plug 'ludovicchabant/vim-gutentags'
+" 
+"     " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+"     " gutentags searches characters of project directories, and stops
+"     " recusively searching.
+"     let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+"     
+"     let g:gutentags_ctags_tagfile = '.tags'
+"     
+"     " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+"     let s:vim_tags = expand('~/.cache/tags')
+"     let g:gutentags_cache_dir = s:vim_tags
+"     
+"     let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+"     let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+"     let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+"     
+"     if !isdirectory(s:vim_tags)
+"        silent! call mkdir(s:vim_tags, 'p')
+"     endif
 " }}
 
 " Asyncrun: {{
@@ -287,7 +372,7 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     nnoremap <silent> <F6> :AsyncRun -cwd=<root> -raw make test <cr>
     nnoremap <silent> <F7> :AsyncRun -cwd=<root> make -j <cr>
     nnoremap <silent> <F8> :AsyncRun -cwd=<root> -raw make run <cr>
-    nnoremap <silent> <F9> :AsyncRun g++ -std=c++14 -Wall -O2 -fopenmp "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+    nnoremap <silent> <F9> :AsyncRun g++ -std=c++17 -Wall -O2 -fopenmp "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
     nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 " }}
 
@@ -390,6 +475,17 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
     Plug 'octol/vim-cpp-enhanced-highlight'
     let g:cpp_member_variable_highlight = 1
     let g:cpp_class_scope_highlight = 1
+" }}
+
+" OneDark: {{
+    Plug 'joshdick/onedark.vim'
+    syntax on
+    " packadd! onedark.vim
+    colorscheme onedark
+" }}
+
+" VimPolyglot: {{
+    Plug 'sheerun/vim-polyglot'
 " }}
 
 call plug#end()
