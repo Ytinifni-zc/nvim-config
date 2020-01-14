@@ -173,6 +173,10 @@ if (empty($TMUX))
   endif
 endif
 
+" Copy to clipboard On {Mac OSX}
+vnoremap <M-c> :w !pbcopy<cr>
+vnoremap <M-S-c> :%w !pbcopy<cr>
+
 " **********************       End Config      *************************
 
 " **********************        Plugins        *************************
@@ -272,12 +276,13 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 " }}
 
 " Tagbar: {{
-   Plug 'majutsushi/tagbar'
-   nmap <F2> :TagbarToggle<CR>
+"  Plug 'majutsushi/tagbar'
+"  nmap <F2> :TagbarToggle<CR>
 " }}
 
 " LeaderF: {{
-   Plug 'Yggdroot/LeaderF'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+   let g:Lf_WindowPosition = 'popup'
    nmap <C-l> :LeaderfFunction<CR>
 " }}
 
@@ -406,17 +411,21 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
 " *** Markdown ***
 
 " MarkdownComposer: {{
-    function! BuildComposer(info)
-      if a:info.status != 'unchanged' || a:info.force
-        if has('nvim')
-          !cargo build --release
-        else
-          !cargo build --release --no-default-features --features json-rpc
-        endif
-      endif
-    endfunction
-    
-    Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+"   function! BuildComposer(info)
+"     if a:info.status != 'unchanged' || a:info.force
+"       if has('nvim')
+"         !cargo build --release
+"       else
+"         !cargo build --release --no-default-features --features json-rpc
+"       endif
+"     endif
+"   endfunction
+"   
+"   Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+" }}
+
+" Vim-markdown: {{
+    Plug 'SpaceVim/vim-markdown'
 " }}
 
 " *** Vision ***
